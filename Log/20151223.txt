@@ -1,0 +1,80 @@
+时间：2015/12/23 10:15:16,操作人员ID：86,操作人员姓名：系统管理员,日志信息：错误地址:DAL.UserInfo[public static Model.UserInfo GetByLoginId(string loginId)],错误信息：System.InvalidOperationException: ExecuteReader: Connection 属性尚未初始化。
+   在 System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.ExecuteReader()
+   在 DBCommon.DBOper.ExecuteReader(DbConnection conn, String cmdText, DbCommand cmd, CommandType cmdType, DbParameter[] para) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\DBCommon\DBOper.cs:行号 35
+   在 DBHelper.MSSQL.SqlGet(SqlConnection conn, String table, String field, String str, SqlParameter[] para) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\DBHelper\MSSQL.cs:行号 104
+   在 DAL.UserInfo.GetByLoginId(String loginId) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\DAL\UserInfo.cs:行号 222
+时间：2015/12/23 10:18:03,操作人员ID：86,操作人员姓名：系统管理员,日志信息：错误地址:DAL.UserInfo[public static Model.UserInfo GetByLoginId(string loginId)],错误信息：System.Data.SqlClient.SqlException: ',' 附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.ExecuteReader()
+   在 DBCommon.DBOper.ExecuteReader(DbConnection conn, String cmdText, DbCommand cmd, CommandType cmdType, DbParameter[] para) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\DBCommon\DBOper.cs:行号 35
+   在 DBHelper.MSSQL.SqlGet(SqlConnection conn, String table, String field, String str, SqlParameter[] para) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\DBHelper\MSSQL.cs:行号 104
+   在 DAL.UserInfo.GetByLoginId(String loginId) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\DAL\UserInfo.cs:行号 223
+时间：2015/12/23 10:21:16,操作人员ID：547,操作人员姓名：会员管理员3,日志信息：登陆系统
+时间：2015/12/23 10:21:20,操作人员ID：547,操作人员姓名：会员管理员3,日志信息：修改密码成功！
+时间：2015/12/23 10:23:40,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：返回信息：【MchtId:104000415090035,TotalCnt:1,getResponseCode:E0000,getResponseMsg:正常】
+时间：2015/12/23 10:23:40,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：返回结果：【responseCode：R1001，responseMsg：处理中】
+时间：2015/12/23 10:23:40,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：订单ID:28,订单号:20151222092946957,订单金额：0.6元,银行返回处理中，请耐心等待！！
+时间：2015/12/23 10:23:52,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：返回信息：【MchtId:,TotalCnt:0,getResponseCode:E0010,getResponseMsg:重复提交（相同商户批次号已经存在）】
+时间：2015/12/23 10:23:52,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：返回结果：【responseCode：E0010，responseMsg：重复提交（相同商户批次号已经存在）】
+时间：2015/12/23 10:23:52,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：订单ID:27,订单号:20151222092715956,订单金额：0.5元,资金提取暂未成功！
+时间：2015/12/23 11:29:50,操作人员ID：549,操作人员姓名：会员管理员测试帐号,日志信息：登陆系统
+时间：2015/12/23 11:30:01,操作人员ID：549,操作人员姓名：会员管理员测试帐号,日志信息：修改密码成功！
+时间：2015/12/23 11:31:12,操作人员ID：549,操作人员姓名：会员管理员测试帐号,日志信息：审核通过订单ID:34,客户姓名孙灵灵,返佣金额0.05
+时间：2015/12/23 11:32:41,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：返回信息：【MchtId:104000415090035,TotalCnt:1,getResponseCode:E0000,getResponseMsg:正常】
+时间：2015/12/23 11:32:41,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：返回结果：【responseCode：R1001，responseMsg：处理中】
+时间：2015/12/23 11:32:41,操作人员ID：542,操作人员姓名：孙灵灵,日志信息：订单ID:34,订单号:20151223113103607,订单金额：0.05元,银行返回处理中，请耐心等待！！
+时间：2015/12/23 12:59:42,操作人员ID：86,操作人员姓名：系统管理员,日志信息：删除订单ID:35,客户姓名会员管理员测试帐号,返佣金额3223
+时间：2015/12/23 13:09:34,操作人员ID：86,操作人员姓名：系统管理员,日志信息：删除订单ID:37,客户姓名孙灵灵,返佣金额0.02
+时间：2015/12/23 13:09:39,操作人员ID：86,操作人员姓名：系统管理员,日志信息：删除订单ID:36,客户姓名孙灵灵,返佣金额0.01
+时间：2015/12/23 13:32:30,操作人员ID：550,操作人员姓名：阿德,日志信息：登陆系统
+时间：2015/12/23 13:32:57,操作人员ID：550,操作人员姓名：阿德,日志信息：修改密码成功！
+时间：2015/12/23 14:13:42,操作人员ID：133,操作人员姓名：李明明,日志信息：登陆系统
+时间：2015/12/23 14:15:16,操作人员ID：540,操作人员姓名：刘文文,日志信息：登陆系统
+时间：2015/12/23 14:15:56,操作人员ID：133,操作人员姓名：李明明,日志信息：登陆系统
+时间：2015/12/23 14:22:53,操作人员ID：86,操作人员姓名：系统管理员,日志信息：系统异常：System.InvalidOperationException: Eval()、XPath() 和 Bind() 这类数据绑定方法只能在数据绑定控件的上下文中使用。
+   在 System.Web.UI.Page.GetDataItem()
+   在 System.Web.UI.TemplateControl.Eval(String expression)
+   在 ASP.webadmin_user_list_aspx.__Render__control5(HtmlTextWriter __w, Control parameterContainer) 位置 e:\学习资料\权限管理系统\XT有权限操作的网站后台源码\UI\webadmin\User\list.aspx:行号 102
+   在 System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   在 System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.Control.Render(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   在 System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.Control.Render(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   在 System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   在 System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   在 System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   在 System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.Page.Render(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
