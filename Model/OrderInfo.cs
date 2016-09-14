@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Model
@@ -9,9 +10,12 @@ namespace Model
     /// OrderInfo:订单实体类
     /// </summary>
     [Serializable]
+    [DataContract]
     public class OrderInfo
     {
         private int _id;
+
+        [DataMember]
 
         public int Id
         {
@@ -19,6 +23,7 @@ namespace Model
             set { _id = value; }
         }
         private string _orderId;
+        [DataMember]
 
         public string OrderId
         {
@@ -26,6 +31,7 @@ namespace Model
             set { _orderId = value; }
         }
         private string _batchNo;
+        [DataMember]
 
         public string BatchNo
         {
@@ -33,6 +39,7 @@ namespace Model
             set { _batchNo = value; }
         }
         private string _amount;
+        [DataMember]
 
         public string Amount
         {
@@ -40,6 +47,7 @@ namespace Model
             set { _amount = value; }
         }
         private DateTime _createTime;//创建时间
+        [DataMember]
 
         public DateTime CreateTime
         {
@@ -48,6 +56,7 @@ namespace Model
         }
      
         private DateTime _submitTime;//审核提交时间
+        [DataMember]
 
         public DateTime SubmitTime
         {
@@ -55,6 +64,7 @@ namespace Model
             set { _submitTime = value; }
         }
         private string _batchContent;
+        [DataMember]
 
         public string BatchContent
         {
@@ -62,6 +72,7 @@ namespace Model
             set { _batchContent = value; }
         }
         private int _uid;
+        [DataMember]
 
         public int Uid
         {
@@ -69,6 +80,7 @@ namespace Model
             set { _uid = value; }
         }
         private string _orderStatus;//1为新建 2为已浏览 3为已返回成功 4为已返回失败 5为银行处理中 6为已审核 已审核后的单才能提交发起提现
+        [DataMember]
 
         public string OrderStatus
         {
@@ -76,6 +88,7 @@ namespace Model
             set { _orderStatus = value; }
         }
         private string _remark;
+        [DataMember]
 
         public string Remark
         {
@@ -83,6 +96,7 @@ namespace Model
             set { _remark = value; }
         }
         private string _iseable;//0为已删除 1为已启用
+        [DataMember]
 
         public string Iseable
         {
@@ -90,6 +104,7 @@ namespace Model
             set { _iseable = value; }
         }
         private DateTime _updateTime;
+        [DataMember]
 
         public DateTime UpdateTime
         {
@@ -98,6 +113,7 @@ namespace Model
         }
 
         private string _createBank;
+        [DataMember]
 
         public string CreateBank
         {
@@ -106,12 +122,14 @@ namespace Model
         }
         private string _branchBank;
 
+        [DataMember]
         public string BranchBank
         {
             get { return _branchBank; }
             set { _branchBank = value; }
         }
         private string _branchBankZH;
+        [DataMember]
 
         public string BranchBankZH
         {
@@ -119,6 +137,7 @@ namespace Model
             set { _branchBankZH = value; }
         }
         private string _bankNumber;
+        [DataMember]
 
         public string BankNumber
         {
@@ -126,6 +145,7 @@ namespace Model
             set { _bankNumber = value; }
         }
         private string _belongTo;
+        [DataMember]
 
         public string BelongTo
         {
@@ -133,6 +153,7 @@ namespace Model
             set { _belongTo = value; }
         }
         private string _api;
+        [DataMember]
 
         public string Api
         {
@@ -141,6 +162,7 @@ namespace Model
         }
 
         private string _userName;
+        [DataMember]
 
         public string UserName
         {
@@ -148,6 +170,7 @@ namespace Model
             set { _userName = value; }
         }
         private string _loginId;
+        [DataMember]
 
         public string LoginId
         {
@@ -155,6 +178,7 @@ namespace Model
             set { _loginId = value; }
         }
         private string _inputPerson;
+        [DataMember]
 
         public string InputPerson
         {
@@ -163,6 +187,7 @@ namespace Model
         }
 
         private string _status;
+        [DataMember]
 
         public string Status
         {
