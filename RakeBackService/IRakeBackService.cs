@@ -64,6 +64,13 @@ namespace Services
         ResponseBase<IList<UserInfo>> GetUserInfo(int pageSize, int pageIndex, Dictionary<string, string> conditions);
 
         /// <summary>
+        /// 添加用户信息
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<UserInfo> AddUserInfo(UserInfo info);
+
+        /// <summary>
         /// 修改用户信息
         /// </summary>
         /// <returns></returns>
@@ -75,7 +82,7 @@ namespace Services
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<bool> DelUserInfo(UserInfo info);
+        ResponseBase<bool> DelUserInfo(int id);
 
     }
 }

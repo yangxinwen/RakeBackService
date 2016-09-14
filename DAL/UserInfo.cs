@@ -39,9 +39,7 @@ namespace DAL
                                             api,
                                             isUpdatePass,
                                             inputPerson,
-                                            iseable,
-                                            province,
-                                            city";
+                                            iseable";
                     string str = @"
                                             @userName,
                                             @userPhone,
@@ -59,9 +57,7 @@ namespace DAL
                                             @api,
                                             @isUpdatePass,
                                             @inputPerson,
-                                            @iseable,
-                                            @province,
-                                            @city";
+                                            @iseable";
 
                     SqlParameter[] para ={
                                              new SqlParameter("@userName",user.UserName),
@@ -81,8 +77,6 @@ namespace DAL
                                              new SqlParameter("@isUpdatePass",user.IsUpdatePass),
                                              new SqlParameter("@inputPerson",user.InputPerson),
                                              new SqlParameter("@iseable",user.Iseable),
-                                             new SqlParameter("@province",user.Province),
-                                             new SqlParameter("@city",user.City)
                                        };
 
                     return SqlInsert(conn, table, field, str, para);
@@ -124,9 +118,7 @@ namespace DAL
                                             api=@api,
                                             isUpdatePass=@isUpdatePass,
                                             inputPerson=@inputPerson,
-                                            iseable=@iseable,
-                                            province=@province,
-                                            city=@city";
+                                            iseable=@iseable";
 
                     string str = "UserId=@UserId";
                     SqlParameter[] para ={
@@ -148,8 +140,6 @@ namespace DAL
                                           new SqlParameter("@isUpdatePass",user.IsUpdatePass),
                                           new SqlParameter("@inputPerson",user.InputPerson),
                                           new SqlParameter("@iseable",user.Iseable),
-                                          new SqlParameter("@province",user.Province),
-                                          new SqlParameter("@city",user.City),
                                        };
                     return SqlUpdate(conn, table, field, str, para);
                 }
@@ -253,8 +243,8 @@ namespace DAL
                         user.IsUpdatePass = dr["isUpdatePass"] == null ? "" : dr["isUpdatePass"].ToString();
                         user.InputPerson = dr["inputPerson"] == null ? "" : dr["inputPerson"].ToString();
                         user.Iseable = dr["iseable"] == null ? "0" : dr["iseable"].ToString();
-                        user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
-                        user.City = dr["city"] == null ? "0" : dr["city"].ToString();
+                        //user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
+                        //user.City = dr["city"] == null ? "0" : dr["city"].ToString();
                     }
                     dr.Close();
                     return user;
@@ -394,7 +384,7 @@ namespace DAL
             {
                 using (SqlConnection conn = new SqlConnection(dbName))
                 {
-                    string field = "@UserId=@UserId";
+                    string field = "UserId=@UserId";
                     SqlParameter[] para ={
                                              new SqlParameter("@UserId",UserId)
                                        };

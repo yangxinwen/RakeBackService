@@ -74,13 +74,17 @@ namespace Services
             return response;
         }
 
-        public ResponseBase<UserInfo> UpdateUserInfo(UserInfo info)
+        public ResponseBase<UserInfo> AddUserInfo(UserInfo info)
         {
             var response = new ResponseBase<UserInfo>();
             try
             {
-                if (BLL.UserInfo.Edit(info) <= 0)
-                    throw new Exception("修改失败");
+                var user = BLL.UserInfo.GetByLoginId(info.LoginId);
+                if (user != null&& user.UserName!=null)
+                    throw new Exception("已经存在该登陆账号，请从新设置！");
+
+                if (BLL.UserInfo.Add(info) <= 0)
+                    throw new Exception("添加失败");
 
                 response.Content = info;
                 response.IsSuccess = true;
@@ -91,13 +95,30 @@ namespace Services
             }
             return response;
         }
-        public ResponseBase<bool> DelUserInfo(UserInfo info)
+        public ResponseBase<UserInfo> UpdateUserInfo(UserInfo info)
+        {
+            var response = new ResponseBase<UserInfo>();
+            try
+            {
+                if (BLL.UserInfo.Edit(info) <= 0)
+                    throw new Exception("修改失败");
+                
+                response.Content = info;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+        public ResponseBase<bool> DelUserInfo(int id)
         {
             var response = new ResponseBase<bool>();
             try
             {
-                if (BLL.UserInfo.Add(info) <= 0)
-                    throw new Exception("添加失败");
+                if (BLL.UserInfo.Del(id) <= 0)
+                    throw new Exception("删除失败");
 
                 response.Content = true;
                 response.IsSuccess = true;
