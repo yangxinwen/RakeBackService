@@ -311,8 +311,8 @@ namespace DAL
                         user.IsUpdatePass = dr["isUpdatePass"] == null ? "" : dr["isUpdatePass"].ToString();
                         user.InputPerson = dr["inputPerson"] == null ? "" : dr["inputPerson"].ToString();
                         user.Iseable = dr["iseable"] == null ? "" : dr["iseable"].ToString();
-                        user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
-                        user.City = dr["city"] == null ? "0" : dr["city"].ToString();
+                        //user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
+                        //user.City = dr["city"] == null ? "0" : dr["city"].ToString();
                         list.Add(user);
                     }
                     dr.Close();

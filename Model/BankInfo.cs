@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Model
 {
     [Serializable]
+    [DataContract]
     public class BankInfo
     {
         private int id;
+        [DataMember]
 
         public int Id
         {
@@ -16,6 +19,7 @@ namespace Model
             set { id = value; }
         }
         private string bankName;
+        [DataMember]
 
         public string BankName
         {
@@ -23,6 +27,7 @@ namespace Model
             set { bankName = value; }
         }
         private string bankValue;
+        [DataMember]
 
         public string BankValue
         {

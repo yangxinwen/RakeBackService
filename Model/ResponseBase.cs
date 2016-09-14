@@ -10,12 +10,12 @@ namespace Model
     /// 回应基类
     /// </summary>
     [DataContract]
-    public class ResponseBase
+    public class ResponseBase<T>
     {
         [DataMember]
         public bool IsSuccess { get; set; }
         [DataMember]
-        public object Content { get; set; }
+        public T Content { get; set; }
         [DataMember]
         public int Count { get; set; }
         [DataMember]

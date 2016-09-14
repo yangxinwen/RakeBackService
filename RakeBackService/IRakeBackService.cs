@@ -18,8 +18,21 @@ namespace Services
         /// <param name="pageIndex"></param>
         /// <param name="conditions"></param>
         /// <returns></returns>
+        //[OperationContract]
+        //ResponseBase GetNewRakeBack(int pageSize,int pageIndex,Dictionary<string,string> conditions);
+
+
+
+        /// <summary>
+        /// 获取新建返佣的数据
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
         [OperationContract]
-        ResponseBase GetNewRakeBack(int pageSize,int pageIndex,Dictionary<string,string> conditions);
+        ResponseBase<IList<UserInfo>> GetNewRakeBack(int pageSize, int pageIndex, Dictionary<string, string> conditions);
+
 
 
         [OperationContract]
