@@ -80,7 +80,7 @@ namespace Services
             try
             {
                 var user = BLL.UserInfo.GetByLoginId(info.LoginId);
-                if (user != null&& user.UserName!=null)
+                if (user != null && user.UserName != null)
                     throw new Exception("已经存在该登陆账号，请从新设置！");
 
                 if (BLL.UserInfo.Add(info) <= 0)
@@ -102,7 +102,7 @@ namespace Services
             {
                 if (BLL.UserInfo.Edit(info) <= 0)
                     throw new Exception("修改失败");
-                
+
                 response.Content = info;
                 response.IsSuccess = true;
             }
@@ -117,7 +117,12 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
-                if (BLL.UserInfo.Del(id) <= 0)
+                var user = BLL.UserInfo.Get(id);
+                if (user == null || user.UserName == null)
+                    throw new Exception("找不到该账户信息！");
+
+                user.Iseable = "0";
+                if (BLL.UserInfo.Edit(user) <= 0)
                     throw new Exception("删除失败");
 
                 response.Content = true;
@@ -129,5 +134,83 @@ namespace Services
             }
             return response;
         }
+
+        public ResponseBase<bool> AddRakeBack(OrderInfo info)
+        {
+            var response = new ResponseBase<bool>();
+            try
+            {
+                if (BLL.OrderInfo.Add(info) <= 0)
+                    throw new Exception("添加失败");
+
+                response.Content = true;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
+
+        public ResponseBase<bool> UpdateOrderInfo(OrderInfo info)
+        {
+            var response = new ResponseBase<bool>();
+            try
+            {
+                if (BLL.OrderInfo.Edit(info) <= 0)
+                    throw new Exception("更新失败");
+
+                response.Content = true;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
+
+        public ResponseBase<bool> DelOrderInfo(OrderInfo info)
+        {
+            var response = new ResponseBase<bool>();
+            try
+            {
+                if (BLL.OrderInfo.Del(info) <= 0)
+                    throw new Exception("删除失败");
+
+                response.Content = true;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
+        public ResponseBase<UserInfo> Login(string loginCode, string password)
+        {
+            var response = new ResponseBase<UserInfo>();
+            try
+            {
+                var user = BLL.UserInfo.Get(loginCode, password);
+                if (user == null || user.UserName == null)
+                    throw new Exception("用户名或密码不对");
+
+                response.Content = user;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
+
+
     }
 }
