@@ -15,9 +15,10 @@ namespace Host
         {
             ServiceHost serviceHost = new ServiceHost(typeof(RakeBackService));
             serviceHost.Open();
+            Console.WriteLine("---------------服务已启动-------------   "+DateTime.Now.ToString());
             while (true)
             {
-                Thread.Sleep(10 * 1000);
+                Thread.Sleep(1000 * 1000);
             }
         }
     }

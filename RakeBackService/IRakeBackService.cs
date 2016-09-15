@@ -39,7 +39,7 @@ namespace Services
         /// <param name="info"></param>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<bool> AddRakeBack(OrderInfo info);
+        ResponseBase<bool> AddRakeBack(OrderInfo info, string operateLoginId);
 
 
         /// <summary>
@@ -76,21 +76,21 @@ namespace Services
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<UserInfo> AddUserInfo(UserInfo info);
+        ResponseBase<UserInfo> AddUserInfo(UserInfo info, string operateLoginId);
 
         /// <summary>
         /// 修改用户信息
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<UserInfo> UpdateUserInfo(UserInfo info);
+        ResponseBase<UserInfo> UpdateUserInfo(UserInfo info, string operateLoginId);
 
         /// <summary>
         /// 删除用户信息
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<bool> DelUserInfo(int id);
+        ResponseBase<bool> DelUserInfo(int id, string operateLoginId);
 
 
         /// <summary>
@@ -98,14 +98,14 @@ namespace Services
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<bool> UpdateOrderInfo(OrderInfo info);
+        ResponseBase<bool> UpdateOrderInfo(OrderInfo info, string operateLoginId);
 
         /// <summary>
         /// 删除返佣信息
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        ResponseBase<bool> DelOrderInfo(OrderInfo info);
+        ResponseBase<bool> DelOrderInfo(OrderInfo info, string operateLoginId);
 
         /// <summary>
         /// 登录
@@ -113,6 +113,12 @@ namespace Services
         /// <returns></returns>
         [OperationContract]
         ResponseBase<UserInfo> Login(string loginCode,string password);
+        /// <summary>
+        /// 注销登录
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<bool> OutLogin(int userId, string userName);
 
         /// <summary>
         /// 修改密码
@@ -128,6 +134,27 @@ namespace Services
         /// <returns></returns>
         [OperationContract]
         ResponseBase<Tuple<string, string>> GetAmountStatistics(Dictionary<string, string> conditions);
+
+        /// <summary>
+        /// 获取用户操作信息
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<IList<OperInfo>> GetOperateLog(int pageSize, int pageIndex, Dictionary<string, string> conditions);
+
+
+        /// <summary>
+        /// 获取订单日志
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<IList<FlowInfo>> GetOrderLog(int pageSize, int pageIndex, Dictionary<string, string> conditions);
 
     }
 }

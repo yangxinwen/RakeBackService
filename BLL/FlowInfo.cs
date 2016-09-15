@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Web;
 namespace BLL
@@ -29,10 +31,19 @@ namespace BLL
 
         public static void AddFlow(string Info, string optypes, string orderid)
         {
+
+            //提供方法执行的上下文环境
+            OperationContext context = OperationContext.Current;
+            //获取传进的消息属性
+            MessageProperties properties = context.IncomingMessageProperties;
+            //获取消息发送的远程终结点IP和端口
+            RemoteEndpointMessageProperty endpoint = properties[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+
+
             //写入流水
             Model.FlowInfo fm = new Model.FlowInfo();
             fm.Orderid = orderid;
-            fm.Ip = HttpContext.Current.Request.UserHostAddress.ToString();
+            fm.Ip = endpoint.Address;// HttpContext.Current.Request.UserHostAddress.ToString();
             fm.Optypes = optypes;
             fm.Createtime = DateTime.Now;
             fm.Info = Info;            
