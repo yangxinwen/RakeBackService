@@ -114,5 +114,20 @@ namespace Services
         [OperationContract]
         ResponseBase<UserInfo> Login(string loginCode,string password);
 
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<bool> UpdateUserPassword(int userId,string oldPwd,string newPwd);
+
+        /// <summary>
+        /// 获取返佣统计信息
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<Tuple<string, string>> GetAmountStatistics(Dictionary<string, string> conditions);
+
     }
 }

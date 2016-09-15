@@ -210,6 +210,50 @@ namespace Services
             return response;
         }
 
+        public ResponseBase<bool> UpdateUserPassword(int userId, string oldPwd, string newPwd)
+        {
+            var response = new ResponseBase<bool>();
+            try
+            {
+                var user = BLL.UserInfo.Get(userId);
+                if (user == null || user.UserName == null)
+                    throw new Exception("找不到该账户信息！");
+
+                if(user.UserPwd.Equals(oldPwd)==false)
+                    throw new Exception("原密码不匹配");
+
+                user.UserPwd = newPwd;
+                if (BLL.UserInfo.Edit(user) <= 0)
+                    throw new Exception("修改失败");
+
+                response.Content = true;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
+        public ResponseBase<Tuple<string, string>> GetAmountStatistics(Dictionary<string, string> conditions)
+        {
+            var response = new ResponseBase<Tuple<string, string>>();
+            try
+            {
+                var count = BLL.OrderInfo.AmountStatisticsCount(conditions);
+                var amount = BLL.OrderInfo.AmountStatistics(conditions);               
+
+                response.Content = new Tuple<string,string>(count,amount);
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
 
 
     }
