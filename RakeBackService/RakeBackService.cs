@@ -338,6 +338,7 @@ namespace Services
                 response.Content = user;
                 response.IsSuccess = true;
 
+                Console.WriteLine("login:"+loginCode +" "+DateTime.Now.ToString());
                 try
                 {
                     //加入操作日志
@@ -392,6 +393,8 @@ namespace Services
                     throw new Exception("原密码不匹配");
 
                 user.UserPwd = newPwd;
+                user.IsUpdatePass = "1";
+
                 if (BLL.UserInfo.Edit(user) <= 0)
                     throw new Exception("修改失败");
 
