@@ -282,11 +282,23 @@ namespace Services
         }
 
 
-        public ResponseBase<bool> DelOrderInfo(OrderInfo info,string operateLoginId)
+        public ResponseBase<bool> DelOrderInfo(OrderInfo info, string operateLoginId)
         {
             var response = new ResponseBase<bool>();
             try
             {
+                var order = BLL.OrderInfo.Get(info.Id);
+                if (order == null)
+                    throw new Exception("找不到订单");
+
+                if (order.OrderStatus.Equals("" + (int)OrderStatus.NewOrder) ||
+                             order.OrderStatus.Equals("" + (int)OrderStatus.Audited))
+                {
+                    ;
+                }
+                else
+                    throw new Exception("该订单已通过审核不允许删除");
+
                 if (BLL.OrderInfo.Del(info) <= 0)
                     throw new Exception("删除失败");
 
@@ -338,7 +350,7 @@ namespace Services
                 response.Content = user;
                 response.IsSuccess = true;
 
-                Console.WriteLine("login:"+loginCode +" "+DateTime.Now.ToString());
+                Console.WriteLine("login:" + loginCode + " " + DateTime.Now.ToString());
                 try
                 {
                     //加入操作日志
