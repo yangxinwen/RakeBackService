@@ -156,5 +156,12 @@ namespace Services
         [OperationContract]
         ResponseBase<IList<FlowInfo>> GetOrderLog(int pageSize, int pageIndex, Dictionary<string, string> conditions);
 
+        /// <summary>
+        /// 获取系统配置
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<string> GetConfig(string key);
+
     }
 }

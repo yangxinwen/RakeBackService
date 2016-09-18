@@ -7,6 +7,7 @@ using Model;
 using System.Threading;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Configuration;
 
 namespace Services
 {
@@ -472,6 +473,21 @@ namespace Services
             {
                 response.Count = BLL.FlowInfo.Get(0, 0, conditions).Count;
                 response.Content = BLL.FlowInfo.Get(pageSize, pageIndex, conditions);
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+        public ResponseBase<string> GetConfig(string key)
+        {
+            var response = new ResponseBase<string>();
+            try
+            {
+                var value=ConfigurationManager.AppSettings[key].ToString();
+                response.Content = value;
                 response.IsSuccess = true;
             }
             catch (Exception ex)
