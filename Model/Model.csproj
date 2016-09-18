@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ArticleInfo.cs" />
     <Compile Include="ArticleTypeInfo.cs" />
+    <Compile Include="OrderFlowLogType.cs" />
     <Compile Include="OrderStatus.cs" />
     <Compile Include="ResponseBase.cs" />
     <Compile Include="BankInfo.cs" />

@@ -14,6 +14,8 @@ namespace Services
     public class RakeBackService : IRakeBackService
     {
 
+        public static Dictionary<string, IContextChannel> _clientList = new Dictionary<string, IContextChannel>();
+
         public ResponseBase<IList<UserInfo>> GetNewRakeBack(int pageSize, int pageIndex, Dictionary<string, string> conditions)
         {
             var response = new ResponseBase<IList<UserInfo>>();
@@ -351,6 +353,20 @@ namespace Services
                 response.Content = user;
                 response.IsSuccess = true;
 
+
+                //提供方法执行的上下文环境
+                OperationContext context = OperationContext.Current;
+                //获取传进的消息属性
+                var channel = context.Channel;
+
+                if (_clientList.ContainsKey(loginCode))
+                {
+                    _clientList[loginCode].Close();
+                    _clientList[loginCode] = channel;
+                }
+                else
+                    _clientList.Add(loginCode, channel);
+
                 Console.WriteLine("login:" + loginCode + " " + DateTime.Now.ToString());
                 try
                 {
@@ -486,7 +502,7 @@ namespace Services
             var response = new ResponseBase<string>();
             try
             {
-                var value=ConfigurationManager.AppSettings[key].ToString();
+                var value = ConfigurationManager.AppSettings[key].ToString();
                 response.Content = value;
                 response.IsSuccess = true;
             }
@@ -497,6 +513,28 @@ namespace Services
             return response;
         }
 
+        public ResponseBase<bool> AddOrderFlowLog(OrderFlowLogType logType, string orderId)
+        {
+            var response = new ResponseBase<bool>();
+            try
+            {
 
+                string operateType = string.Empty;
+                string info = string.Empty;
+                if (logType == OrderFlowLogType.IEOpen)
+                {
+                    operateType = "IEOpen";
+                    info = "会员打开提现页面";
+                }
+                BLL.FlowInfo.AddFlow(info, operateType, orderId);
+                response.Content = true;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
     }
 }

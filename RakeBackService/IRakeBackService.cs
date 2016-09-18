@@ -162,6 +162,12 @@ namespace Services
         /// <returns></returns>
         [OperationContract]
         ResponseBase<string> GetConfig(string key);
+        /// <summary>
+        /// 添加订单流水日志
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<bool> AddOrderFlowLog(OrderFlowLogType logType,string orderId);
 
     }
 }
