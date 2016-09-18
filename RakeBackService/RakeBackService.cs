@@ -8,19 +8,59 @@ using System.Threading;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace Services
 {
     public class RakeBackService : IRakeBackService
     {
+        /// <summary>
+        /// loginCode,ip:port
+        /// </summary>
+        public static Dictionary<string, string> _clientList = new Dictionary<string, string>();
 
-        public static Dictionary<string, IContextChannel> _clientList = new Dictionary<string, IContextChannel>();
+
+        private void SessionVaild()
+        {
+            //提供方法执行的上下文环境
+            OperationContext context = OperationContext.Current;
+            //获取传进的消息属性
+            MessageProperties properties = context.IncomingMessageProperties;
+            //获取消息发送的远程终结点IP和端口
+            RemoteEndpointMessageProperty endpoint = properties[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+
+            var sessionId = endpoint.Address + ":" + endpoint.Port;
+            if (_clientList.ContainsValue(sessionId) == false)
+                throw new Exception("该用户已被踢下线，请重新登录");
+        }
+
+        private void AddSession(string loginCode)
+        {
+            //提供方法执行的上下文环境
+            OperationContext context = OperationContext.Current;
+            //获取传进的消息属性
+            MessageProperties properties = context.IncomingMessageProperties;
+            //获取消息发送的远程终结点IP和端口
+            RemoteEndpointMessageProperty endpoint = properties[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+
+            var sessionId = endpoint.Address + ":" + endpoint.Port;
+
+            if (_clientList.ContainsKey(loginCode))
+            {
+                _clientList[loginCode] = sessionId;
+            }
+            else
+                _clientList.Add(loginCode, sessionId);
+        }
+
+
 
         public ResponseBase<IList<UserInfo>> GetNewRakeBack(int pageSize, int pageIndex, Dictionary<string, string> conditions)
         {
             var response = new ResponseBase<IList<UserInfo>>();
             try
             {
+                SessionVaild();
                 response.Count = BLL.UserInfo.Get(0, 0, conditions).Count;
                 response.Content = BLL.UserInfo.Get(pageSize, pageIndex, conditions);
                 response.IsSuccess = true;
@@ -37,6 +77,7 @@ namespace Services
             var response = new ResponseBase<IList<OrderInfo>>();
             try
             {
+                SessionVaild();
                 response.Count = BLL.OrderInfo.Get(0, 0, conditions).Count;
                 response.Content = BLL.OrderInfo.Get(pageSize, pageIndex, conditions);
                 response.IsSuccess = true;
@@ -52,6 +93,7 @@ namespace Services
             var response = new ResponseBase<IList<RoleInfo>>();
             try
             {
+                SessionVaild();
                 response.Content = BLL.RoleInfo.Get();
                 response.IsSuccess = true;
             }
@@ -61,13 +103,12 @@ namespace Services
             }
             return response;
         }
-
-
         public ResponseBase<IList<UserInfo>> GetUserInfo(int pageSize, int pageIndex, Dictionary<string, string> conditions)
         {
             var response = new ResponseBase<IList<UserInfo>>();
             try
             {
+                SessionVaild();
                 response.Count = BLL.UserInfo.Get(0, 0, conditions).Count;
                 response.Content = BLL.UserInfo.Get(pageSize, pageIndex, conditions);
                 response.IsSuccess = true;
@@ -84,6 +125,7 @@ namespace Services
             var response = new ResponseBase<UserInfo>();
             try
             {
+                SessionVaild();
                 var user = BLL.UserInfo.GetByLoginId(info.LoginId);
                 if (user != null && user.UserName != null)
                     throw new Exception("已经存在该登陆账号，请从新设置！");
@@ -134,6 +176,7 @@ namespace Services
             var response = new ResponseBase<UserInfo>();
             try
             {
+                SessionVaild();
                 if (BLL.UserInfo.Edit(info) <= 0)
                     throw new Exception("修改失败");
 
@@ -151,6 +194,7 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
+                SessionVaild();
                 var user = BLL.UserInfo.Get(id);
                 if (user == null || user.UserName == null)
                     throw new Exception("找不到该账户信息！");
@@ -193,6 +237,7 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
+                SessionVaild();
                 if (BLL.OrderInfo.Add(info) <= 0)
                     throw new Exception("添加失败");
 
@@ -238,6 +283,7 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
+                SessionVaild();
                 if (BLL.OrderInfo.Edit(info) <= 0)
                     throw new Exception("更新失败");
 
@@ -290,6 +336,7 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
+                SessionVaild();
                 var order = BLL.OrderInfo.Get(info.Id);
                 if (order == null)
                     throw new Exception("找不到订单");
@@ -350,22 +397,9 @@ namespace Services
                 if (user == null || user.UserName == null)
                     throw new Exception("用户名或密码不对");
 
+                AddSession(loginCode);
                 response.Content = user;
                 response.IsSuccess = true;
-
-
-                //提供方法执行的上下文环境
-                OperationContext context = OperationContext.Current;
-                //获取传进的消息属性
-                var channel = context.Channel;
-
-                if (_clientList.ContainsKey(loginCode))
-                {
-                    _clientList[loginCode].Close();
-                    _clientList[loginCode] = channel;
-                }
-                else
-                    _clientList.Add(loginCode, channel);
 
                 Console.WriteLine("login:" + loginCode + " " + DateTime.Now.ToString());
                 try
@@ -414,6 +448,7 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
+                SessionVaild();
                 var user = BLL.UserInfo.Get(userId);
                 if (user == null || user.UserName == null)
                     throw new Exception("找不到该账户信息！");
@@ -453,6 +488,7 @@ namespace Services
             var response = new ResponseBase<Tuple<string, string>>();
             try
             {
+                SessionVaild();
                 var count = BLL.OrderInfo.AmountStatisticsCount(conditions);
                 var amount = BLL.OrderInfo.AmountStatistics(conditions);
 
@@ -472,6 +508,7 @@ namespace Services
             var response = new ResponseBase<IList<OperInfo>>();
             try
             {
+                SessionVaild();
                 response.Count = BLL.OperInfo.Get(0, 0, conditions).Count;
                 response.Content = BLL.OperInfo.Get(pageSize, pageIndex, conditions);
                 response.IsSuccess = true;
@@ -487,6 +524,7 @@ namespace Services
             var response = new ResponseBase<IList<FlowInfo>>();
             try
             {
+                SessionVaild();
                 response.Count = BLL.FlowInfo.Get(0, 0, conditions).Count;
                 response.Content = BLL.FlowInfo.Get(pageSize, pageIndex, conditions);
                 response.IsSuccess = true;
@@ -499,9 +537,11 @@ namespace Services
         }
         public ResponseBase<string> GetConfig(string key)
         {
+            SessionVaild();
             var response = new ResponseBase<string>();
             try
             {
+                SessionVaild();
                 var value = ConfigurationManager.AppSettings[key].ToString();
                 response.Content = value;
                 response.IsSuccess = true;
@@ -518,7 +558,7 @@ namespace Services
             var response = new ResponseBase<bool>();
             try
             {
-
+                SessionVaild();
                 string operateType = string.Empty;
                 string info = string.Empty;
                 if (logType == OrderFlowLogType.IEOpen)
