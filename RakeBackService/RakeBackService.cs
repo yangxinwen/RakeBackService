@@ -19,32 +19,36 @@ namespace Services
         /// </summary>
         public static Dictionary<string, string> _clientList = new Dictionary<string, string>();
 
-
-        private void SessionVaild()
+        private string GetHeadSessionId()
         {
             //提供方法执行的上下文环境
             OperationContext context = OperationContext.Current;
-            //获取传进的消息属性
-            MessageProperties properties = context.IncomingMessageProperties;
-            //获取消息发送的远程终结点IP和端口
-            RemoteEndpointMessageProperty endpoint = properties[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+            var properties = context.IncomingMessageHeaders;
+            string sessionId = string.Empty;
+            try
+            {
+                sessionId = properties.GetHeader<string>("sessionId","HeadMessage");
+            }
+            catch (Exception)
+            {
 
-            var sessionId = endpoint.Address + ":" + endpoint.Port;
-            if (_clientList.ContainsValue(sessionId) == false)
+            }
+
+            if (string.IsNullOrWhiteSpace(sessionId))
+                throw new Exception("消息头验证失败");
+            return sessionId;
+        }
+
+
+        private void SessionVaild()
+        {
+            if (_clientList.ContainsValue(GetHeadSessionId()) == false)
                 throw new Exception("该用户已被踢下线，请重新登录");
         }
 
         private void AddSession(string loginCode)
-        {
-            //提供方法执行的上下文环境
-            OperationContext context = OperationContext.Current;
-            //获取传进的消息属性
-            MessageProperties properties = context.IncomingMessageProperties;
-            //获取消息发送的远程终结点IP和端口
-            RemoteEndpointMessageProperty endpoint = properties[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
-
-            var sessionId = endpoint.Address + ":" + endpoint.Port;
-
+        {           
+            var sessionId = GetHeadSessionId();
             if (_clientList.ContainsKey(loginCode))
             {
                 _clientList[loginCode] = sessionId;
