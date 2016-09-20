@@ -541,7 +541,6 @@ namespace Services
         }
         public ResponseBase<string> GetConfig(string key)
         {
-            SessionVaild();
             var response = new ResponseBase<string>();
             try
             {
