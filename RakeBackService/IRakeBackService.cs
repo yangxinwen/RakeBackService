@@ -22,6 +22,13 @@ namespace Services
         //ResponseBase GetNewRakeBack(int pageSize,int pageIndex,Dictionary<string,string> conditions);
 
 
+        /// <summary>
+        /// 获取指定用户信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<UserInfo> GetUserInfoById(int userId);
 
         /// <summary>
         /// 获取新建返佣的数据
@@ -168,6 +175,13 @@ namespace Services
         /// <returns></returns>
         [OperationContract]
         ResponseBase<bool> AddOrderFlowLog(OrderFlowLogType logType,string orderId);
+
+        /// <summary>
+        /// 添加出金操作日志
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<bool> AddOutMoneyOperateLog(int userId,string userName,string orderId);
 
     }
 }

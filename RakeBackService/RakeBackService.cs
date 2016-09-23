@@ -27,7 +27,7 @@ namespace Services
             string sessionId = string.Empty;
             try
             {
-                sessionId = properties.GetHeader<string>("sessionId","HeadMessage");
+                sessionId = properties.GetHeader<string>("sessionId", "HeadMessage");
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace Services
         }
 
         private void AddSession(string loginCode)
-        {           
+        {
             var sessionId = GetHeadSessionId();
             if (_clientList.ContainsKey(loginCode))
             {
@@ -57,7 +57,21 @@ namespace Services
                 _clientList.Add(loginCode, sessionId);
         }
 
-
+        public ResponseBase<UserInfo> GetUserInfoById(int userId)
+        {
+            var response = new ResponseBase<UserInfo>();
+            try
+            {
+                SessionVaild();
+                response.Content = BLL.UserInfo.Get(userId);
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
 
         public ResponseBase<IList<UserInfo>> GetNewRakeBack(int pageSize, int pageIndex, Dictionary<string, string> conditions)
         {
@@ -570,6 +584,27 @@ namespace Services
                     info = "会员打开提现页面";
                 }
                 BLL.FlowInfo.AddFlow(info, operateType, orderId);
+                response.Content = true;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
+
+        public ResponseBase<bool> AddOutMoneyOperateLog(int userId, string userName, string orderId)
+        {
+            var response = new ResponseBase<bool>();
+            try
+            {
+                SessionVaild();
+
+                var info = string.Format("会员{0}发起了订单号为{1}的资金提取", userName, orderId);
+
+                //加入操作日志
+                BLL.OperInfo.Add(userId, userName, info);
                 response.Content = true;
                 response.IsSuccess = true;
             }
