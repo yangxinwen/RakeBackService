@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +54,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{84206026-ad1e-4a76-bb11-6609e71bfc95}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RakeBackService\Services.csproj">
       <Project>{A5E22FDC-00C6-4D23-9218-B5352DBD56C0}</Project>
       <Name>Services</Name>

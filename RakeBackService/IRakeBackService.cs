@@ -182,6 +182,12 @@ namespace Services
         /// <returns></returns>
         [OperationContract]
         ResponseBase<bool> AddOutMoneyOperateLog(int userId,string userName,string orderId);
+        /// <summary>
+        /// 请求升级信息
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        ResponseBase<UpdateInfo> RequestUpdateInfo(string version);
 
     }
 }

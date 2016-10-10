@@ -614,5 +614,30 @@ namespace Services
             }
             return response;
         }
+
+        public ResponseBase<UpdateInfo> RequestUpdateInfo(string version)
+        {
+            var response = new ResponseBase<UpdateInfo>();
+            try
+            {
+                SessionVaild();
+
+                var info = new UpdateInfo();
+                info.UpdateUrl = ApplicationParam.UpdateUrl;
+                if (ApplicationParam.ClientVersion.Equals(version) == false)
+                {
+                    info.IsNeedUpdate = true;
+                    info.IsForceUpdate = ApplicationParam.IsForceUpdate;
+                    info.NewVersion = ApplicationParam.ClientVersion;
+                }
+                response.Content = info;
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMsg = ex.Message;
+            }
+            return response;
+        }
     }
 }
