@@ -39,6 +39,7 @@ namespace DAL
                                             api,
                                             isUpdatePass,
                                             inputPerson,
+                                            menuId,
                                             iseable";
                     string str = @"
                                             @userName,
@@ -57,6 +58,7 @@ namespace DAL
                                             @api,
                                             @isUpdatePass,
                                             @inputPerson,
+                                            @menuId,
                                             @iseable";
 
                     SqlParameter[] para ={
@@ -76,6 +78,7 @@ namespace DAL
                                              new SqlParameter("@api",user.Api),
                                              new SqlParameter("@isUpdatePass",user.IsUpdatePass),
                                              new SqlParameter("@inputPerson",user.InputPerson),
+                                             new SqlParameter("@menuId",user.MenuId),
                                              new SqlParameter("@iseable",user.Iseable),
                                        };
 
@@ -118,6 +121,7 @@ namespace DAL
                                             api=@api,
                                             isUpdatePass=@isUpdatePass,
                                             inputPerson=@inputPerson,
+                                            menuId=@menuId,
                                             iseable=@iseable";
 
                     string str = "UserId=@UserId";
@@ -139,6 +143,7 @@ namespace DAL
                                           new SqlParameter("@api",user.Api),
                                           new SqlParameter("@isUpdatePass",user.IsUpdatePass),
                                           new SqlParameter("@inputPerson",user.InputPerson),
+                                          new SqlParameter("@menuId",user.MenuId),
                                           new SqlParameter("@iseable",user.Iseable),
                                        };
                     return SqlUpdate(conn, table, field, str, para);
@@ -190,6 +195,7 @@ namespace DAL
                         user.Api = dr["api"] == null ? "" : dr["api"].ToString();
                         user.IsUpdatePass = dr["isUpdatePass"] == null ? "" : dr["isUpdatePass"].ToString();
                         user.InputPerson = dr["inputPerson"] == null ? "" : dr["inputPerson"].ToString();
+                        user.MenuId = dr["menuId"] == null ? "" : dr["menuId"].ToString();
                         user.Iseable = dr["iseable"] == null ? "0" : dr["iseable"].ToString();
                         //user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
                         //user.City = dr["city"] == null ? "0" : dr["city"].ToString();
@@ -242,6 +248,7 @@ namespace DAL
                         user.Api = dr["api"] == null ? "" : dr["api"].ToString();
                         user.IsUpdatePass = dr["isUpdatePass"] == null ? "" : dr["isUpdatePass"].ToString();
                         user.InputPerson = dr["inputPerson"] == null ? "" : dr["inputPerson"].ToString();
+                        user.MenuId = dr["menuId"] == null ? "" : dr["menuId"].ToString();
                         user.Iseable = dr["iseable"] == null ? "0" : dr["iseable"].ToString();
                         //user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
                         //user.City = dr["city"] == null ? "0" : dr["city"].ToString();
@@ -300,6 +307,7 @@ namespace DAL
                         user.Api = dr["api"] == null ? "" : dr["api"].ToString();
                         user.IsUpdatePass = dr["isUpdatePass"] == null ? "" : dr["isUpdatePass"].ToString();
                         user.InputPerson = dr["inputPerson"] == null ? "" : dr["inputPerson"].ToString();
+                        user.MenuId = dr["menuId"] == null ? "" : dr["menuId"].ToString();
                         user.Iseable = dr["iseable"] == null ? "" : dr["iseable"].ToString();
                         //user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
                         //user.City = dr["city"] == null ? "0" : dr["city"].ToString();
@@ -354,6 +362,7 @@ namespace DAL
                         user.Api = dr["api"] == null ? "" : dr["api"].ToString();
                         user.IsUpdatePass = dr["isUpdatePass"] == null ? "" : dr["isUpdatePass"].ToString();
                         user.InputPerson = dr["inputPerson"] == null ? "" : dr["inputPerson"].ToString();
+                        user.MenuId = dr["menuId"] == null ? "" : dr["menuId"].ToString();
                         user.Iseable = dr["iseable"] == null ? "" : dr["iseable"].ToString();
                         //user.Province = dr["province"] == null ? "0" : dr["province"].ToString();
                         //user.City = dr["city"] == null ? "0" : dr["city"].ToString();

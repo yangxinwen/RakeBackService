@@ -179,6 +179,15 @@ namespace Model
             set { _city = value; }
         }
 
+        private string _menuId;//管理员权限
+
+        [DataMember]
+        public string MenuId
+        {
+            get { return _menuId; }
+            set { _menuId = value; }
+        }
+
         #endregion Model
 
     }
